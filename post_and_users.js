@@ -26,3 +26,16 @@ const get_users = async () =>{
 let posts,users;
 get_users().then ( data => {users = data; users.map(user => user.posts = []);});
 get_posts().then ( data => posts = data);
+
+
+//connecting users with their posts
+const map_posts_to_users = (posts,users) =>{
+    posts.map(post => users[(parseInt(post.userId))-1].posts.push(post))
+}
+
+//counting posts of every user
+const count_users_posts = (users) =>{
+    for(let i = 0; i < users.length; i++){
+        console.log(users[i].name + " napisał(a) " + users[i].posts.length + " postów");
+    }
+}
