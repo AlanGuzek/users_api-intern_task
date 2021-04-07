@@ -25,9 +25,8 @@ const get_users = async () =>{
 }
 
 //connecting users with their posts
-const map_posts_to_users = (posts,users) =>{
-    posts.map(post => users[(parseInt(post.userId))-1].posts.push(post))
-}
+const map_posts_to_users = (posts,users) => posts.map(post => users[(parseInt(post.userId))-1].posts.push(post));
+
 
 //counting posts of every user
 const count_users_posts = (users) =>{
@@ -37,7 +36,7 @@ const count_users_posts = (users) =>{
 }
 
 //finding repeated posts
-const find_not_unique_posts = (posts) => {
+const find_non_unique_posts = (posts) => {
     let non_unique_titles = [];
     posts.map( post => non_unique_titles.push(post.title));
     non_unique_titles = non_unique_titles.filter((element, index, array) => array.indexOf(element) !==index);
@@ -97,11 +96,28 @@ const run_script = async () => {
     
     console.log("-----------------");
 
-    find_not_unique_posts(posts);
+    find_non_unique_posts(posts);
 
     console.log("-----------------");
     
     find_closests_users(users);
 }
 
-run_script();
+//run script if it is not test mode
+if (process.env.npm_lifecycle_event !== 'test')
+    run_script();
+
+const functions = {
+    radians,
+    calculate_distance,
+    get_posts,
+    get_users,
+    map_posts_to_users,
+    count_users_posts,
+    find_non_unique_posts,
+    find_closests_users,
+}
+
+//exporting functions for testing, only if node.js is running code
+if (typeof module !== 'undefined' && module.exports)
+    module.exports = functions;
