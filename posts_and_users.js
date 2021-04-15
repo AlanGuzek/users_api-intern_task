@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const POSTS_API = "https://jsonplaceholder.typicode.com/posts"
 const USERS_API = "https://jsonplaceholder.typicode.com/users"
 
-
+// Kocham Cię skarbie
 // fetching data from api
 const get_posts = async () =>{
     try{
